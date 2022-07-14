@@ -1,6 +1,8 @@
 {
   "name": "tekinaydogdu/check24",
   "type": "project",
+  "description": "awesome blog app, kinda :)",
+  "license": "proprietary",
   "autoload": {
     "psr-4": {
       "Tekinaydogdu\\Check24\\": "src/"
