@@ -44,7 +44,9 @@ abstract class Repository
 
     public function get(
         ?Where $where = null,
-        $limit = null
+        $limit = null,
+        $offset = 0,
+        $orderBy = null
     ): StatementInterface|ResultSet|ResultSetInterface {
         $sqlObject = $this->sql->select($this->table);
 
@@ -54,6 +56,14 @@ abstract class Repository
 
         if ($limit) {
             $sqlObject->limit($limit);
+        }
+
+        if ($offset) {
+            $sqlObject->offset($offset);
+        }
+
+        if ($orderBy) {
+            $sqlObject->order($orderBy);
         }
 
         $sqlString = $this->sql->buildSqlString($sqlObject);
