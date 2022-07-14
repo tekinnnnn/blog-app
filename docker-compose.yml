@@ -18,6 +18,8 @@ services:
     volumes:
       - .:/var/www/html
     hostname: "dev.php-fpm.localhost"
+    env_file:
+      - ./.docker/php-fpm/.env
     restart: on-failure
     depends_on:
       - db
@@ -27,6 +29,7 @@ services:
     ports:
       - "33060:3306"
     volumes:
-      - /var/lib/mysql
+      - ./storage/mysql:/var/lib/mysql
+    hostname: "dev.mysql.localhost"
     env_file:
       - ./.docker/mysql/.env

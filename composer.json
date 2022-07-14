@@ -26,16 +26,18 @@
     "squizlabs/php_codesniffer": "^3.7",
     "phpstan/phpstan": "^1.8",
     "pestphp/pest": "^1.21",
-    "guzzlehttp/guzzle": "^7.4"
+    "guzzlehttp/guzzle": "^7.4",
+    "monolog/monolog": "^3.1"
   },
   "scripts": {
     "lint": "phpcs --standard=PSR12 src/ tests/",
     "lint-fix": "phpcbf --standard=PSR12 src/ tests/",
-    "static-analysis": "phpstan analyse -l 7 src/ tests/",
+    "static-analysis": "phpstan analyse -l 5 src/",
     "test": "pest run tests/",
-    "test-coverage": "phpstan analyse -l 7 -d src tests/"
+    "test-coverage": "XDEBUG_MODE=coverage pest --coverage tests/"
   },
   "require": {
-    "ext-http": "*"
+    "ext-http": "*",
+    "ext-pdo": "*"
   }
 }
