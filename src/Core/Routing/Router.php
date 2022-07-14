@@ -2,6 +2,8 @@
 
 namespace Tekinaydogdu\Check24\Core\Routing;
 
+use Tekinaydogdu\Check24\Core\View\Redirection;
+
 class Router
 {
     /**
@@ -51,6 +53,17 @@ class Router
 
         foreach ($this->routes as $route) {
             if ($route->match($method, $path)) {
+                if ($route->isPrivate && !isset($_SESSION['user'])) {
+                    if ($method === 'GET') {
+                        new Route('GET', '/login', function () {
+                            return new Redirection('/login');
+                        });
+                    }
+
+                    http_response_code(401);
+                    return;
+                }
+
                 $route();
                 return;
             }

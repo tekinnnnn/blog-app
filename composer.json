@@ -5,7 +5,8 @@
   "license": "proprietary",
   "autoload": {
     "psr-4": {
-      "Tekinaydogdu\\Check24\\": "src/"
+      "Tekinaydogdu\\Check24\\": "src/",
+      "App\\": "app/"
     }
   },
   "authors": [
@@ -38,6 +39,8 @@
   },
   "require": {
     "ext-http": "*",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "laminas/laminas-db": "^2.15",
+    "laminas/laminas-hydrator": "^4.5"
   }
 }

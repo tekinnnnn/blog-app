@@ -2,6 +2,9 @@
 
 namespace Tekinaydogdu\Check24\Core\Routing;
 
+use Tekinaydogdu\Check24\Core\View\Renderable;
+use Tekinaydogdu\Check24\Core\View\View;
+
 class Route
 {
     /** @var array<string,mixed> */
@@ -17,7 +20,7 @@ class Route
         private readonly string $method,
         private string $path,
         private $callback,
-        private bool $isPrivate = false
+        public bool $isPrivate = false
     ) {
         $this->path = $this->normalizePath($path);
     }
@@ -84,6 +87,13 @@ class Route
 
     public function __invoke(): mixed
     {
-        return call_user_func($this->callback, ...$this->args);
+        $return = call_user_func($this->callback, ...$this->args);
+
+        if ($return instanceof Renderable) {
+            $return->render();
+            return null;
+        }
+
+        return $return;
     }
 }
