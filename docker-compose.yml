@@ -1,0 +1,32 @@
+services:
+  nginx:
+    build: ./.docker/nginx
+    ports:
+      - "8888:80"
+      - "8889:443"
+    links:
+      - php-fpm
+    volumes:
+      - .:/var/www/html
+    hostname: "dev.nginx.localhost"
+    restart: on-failure
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    build: ./.docker/php-fpm
+    volumes:
+      - .:/var/www/html
+    hostname: "dev.php-fpm.localhost"
+    restart: on-failure
+    depends_on:
+      - db
+
+  db:
+    image: mysql
+    ports:
+      - "33060:3306"
+    volumes:
+      - /var/lib/mysql
+    env_file:
+      - ./.docker/mysql/.env

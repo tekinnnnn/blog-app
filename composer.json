@@ -1,0 +1,39 @@
+{
+  "name": "tekinaydogdu/check24",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "Tekinaydogdu\\Check24\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Tekin Aydoğdu",
+      "email": "tekinaydogdu01@gmail.com"
+    }
+  ],
+  "config": {
+    "platform": {
+      "php": "8.1"
+    },
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.7",
+    "phpstan/phpstan": "^1.8",
+    "pestphp/pest": "^1.21",
+    "guzzlehttp/guzzle": "^7.4"
+  },
+  "scripts": {
+    "lint": "phpcs --standard=PSR12 src/ tests/",
+    "lint-fix": "phpcbf --standard=PSR12 src/ tests/",
+    "static-analysis": "phpstan analyse -l 7 src/ tests/",
+    "test": "pest run tests/",
+    "test-coverage": "phpstan analyse -l 7 -d src tests/"
+  },
+  "require": {
+    "ext-http": "*"
+  }
+}
